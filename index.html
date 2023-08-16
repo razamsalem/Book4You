@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/5339eb0f7c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="img/book-icon.png" type="image/x-icon">
+    <title>Book4You</title>
+</head>
+
+<body onload="onInit()">
+    <!-- Header -->
+    <h1 data-trans="title">Book4You</h1>
+    <h2 data-trans="subtitle">Books we all love</h2>
+
+    <section class="main-buttons">
+        <button data-trans="add-book" onclick="onAddBook()">Add a book</button>
+    </section>
+
+    <section class="lang-select">
+        <!-- <select onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="it">Italiano</option>
+            <option value="he">עברית</option>
+        </select> -->
+    </section>
+
+    <!-- Filter -->
+    <!-- TODO: make the text search support lower&caps char -->
+    <section class="book-filter">
+        <h2 data-trans="filter">Filter</h2>
+        <input type="text" class="filter-title" placeholder="Look For a book" data-trans="search-bar"
+            oninput="onSetFilterBy({title: this.value.toLowerCase()})">
+        <br>
+        <br>
+        <label>
+            <span data-trans="min-rate">Min Rate:</span>
+            <input type="range" min="1" max="10" value="1" class="filter-rate-range"
+                onchange="onSetFilterBy({minRate: this.value})">
+        </label>
+        <hr>
+        <!-- Sorting -->
+        <div>
+            <span data-trans="sort-header">Sort By:</span>
+            <select class="sort-by" onchange="onSetSortBy()">
+                <option data-trans="sort-all" value="">All</option>
+                <option data-trans="sort-title" value="title">Title</option>
+                <option data-trans="sort-rate" value="maxRate">Rate</option>
+            </select>
+            <label>
+                <span data-trans="descending-option">Descending</span>
+                <input class="sort-desc" type="checkbox" oninput="onSetSortBy()">
+            </label>
+        </div>
+    </section>
+    <hr>
+    <!-- Main Content -->
+    <main>
+        <table class="book-table">
+            <thead>
+                <th data-trans="id-name">Id</th>
+                <th data-trans="title-name">Title</th>
+                <th data-trans="price-name">Price</th>
+                <th data-trans="rate-name">Rating</th>
+                <th data-trans="action-name">Actions</th>
+            </thead>
+            <tbody>
+                <!-- <td>1</td>
+            <td>Shoe Dog</td>
+            <td>10</td>
+            <td><button>Read</button></td>
+            <td><button>Update</button></td>
+            <td><button>Delete</button></td> -->
+            </tbody>
+        </table>
+
+        <div class="main-buttons">
+            <button data-trans="prev-btn" class="prevBtn" onclick="onPrevPage()">&LeftArrow; Prev Page</button>
+            <button data-trans="next-btn" title="Next Page" onclick="onNextPage()">Next Page &RightArrow;</button>
+        </div>
+    </main>
+
+    <!-- Modal for read mdoe -->
+    <div class="modal">
+        <h3></h3>
+        <img src="">
+        <h3> <span data-trans="rate-name">Rate:</span>: <span class="rate" style="color: gold;"></span> &star;</h3>
+        <div class="rate-buttons">
+            <button class="rate-decrease" onclick="onRateChange('+')">+</button>
+            <button class="rate-increase" onclick="onRateChange('-')">-</button>
+        </div>
+        <h4> <span data-trans="price-name"></span>: $<span class="realtime-price"></span></h4>
+        <h5 <span data-trans="description"></span>Book Description</h5>
+        <p></p>
+        <br>
+        <button onclick="onCloseModal()">Close</button>
+        <!-- Msg for the user to know what book he is on rightnow (for touch events) -->
+        <div class="readmode-info-modal hidden">
+            <h2></h2>
+        </div>
+    </div>
+
+    <!-- Msg to tell the user something changed (like book deleted..) -->
+    <div class="user-msg"></div>
+    <hr>
+
+
+
+    <!-- Books Info for the user -->
+    <footer>
+        <table class="footer-table">
+            <thead>
+                <tr>
+                    <th data-trans="category">Category</th>
+                    <th st data-trans="count">Count</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </footer>
+
+    <script src="js/lib/hammer.js"></script>
+    <script src="js/services/util.service.js"></script>
+    <script src="js/services/i18n.service.js"></script>
+    <script src="js/services/book.stoarge.js"></script>
+    <script src="js/services/book.service.js"></script>
+    <script src="js/controllers/book.controller.js"></script>
+</body>
+
+</html>
